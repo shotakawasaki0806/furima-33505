@@ -1,24 +1,53 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+|Column    | Type    | Options     |
+| nickname | string  | null: false |
+| email    | string  | null: false |
+| password | string  | null: false |
+| name     | string  | null: false |
+| kana     | string  | null: false |
+| birthday | integer | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+has_many :items
+has_many :buys
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column   | Type       | Options                        |
+| user     | references | null: false, foreign_key: true |
+| product  | string     | null: false                    |
+| price    | integer    | null: false                    |
+| category | string     | null: false                    |
+| state    | string     | null: false                    |
+| postage  | string     | null: false                    |
+| area     | string     | null: false                    |
+| date     | string     | null: false                    |
 
-* Database initialization
+### Association
+has_one :buy
+belongs_to :user
 
-* How to run the test suite
+## buys テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column  | Type       | Options                        |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
+| address | references | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
+has_one :address
+belongs_to :user
+belongs_to :item
 
-* ...
+## addresses テーブル
+
+| Column  | Type    | Options     |
+| phone   | integer | null: false |
+| address | string  | null: false |
+
+### Association
+belongs_to :buy
