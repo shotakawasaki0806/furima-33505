@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :item do
     product     {"商品名"}
-    price       {"99999"}
+    price       {99999}
     explanation {"商品の説明"}
-    category_id {"2"}
-    state_id    {"2"}
-    postage_id  {"2"}
-    area_id     {"2"}
-    wait_id     {"2"}
+    category_id {2}
+    state_id    {2}
+    postage_id  {2}
+    area_id     {2}
+    wait_id     {2}
     association :user
 
     after(:build) do |item|
