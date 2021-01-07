@@ -32,25 +32,50 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Category must be other than 1"
       end
+      it "category_idが空だと登録できない" do
+        @item.category_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Category is not a number"
+      end
       it "state_idが1だと登録できない" do
         @item.state_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "State must be other than 1"
+      end
+      it "state_idが空だと登録できない" do
+        @item.state_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "State is not a number"
       end
       it "postage_idが1だと登録できない" do
         @item.postage_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Postage must be other than 1"
       end
+      it "postage_idが空だと登録できない" do
+        @item.postage_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Postage is not a number"
+      end
       it "area_idが1だと登録できない" do
         @item.area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Area must be other than 1"
       end
+      it "area_idが空だと登録できない" do
+        @item.area_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Area is not a number"
+      end
       it "wait_idが1だと登録できない" do
         @item.wait_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Wait must be other than 1"
+      end
+      it "wait_idが空だと登録できない" do
+        @item.wait_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include "Wait is not a number"
       end
       it "priceが空だと登録できない" do
         @item.price = ""
