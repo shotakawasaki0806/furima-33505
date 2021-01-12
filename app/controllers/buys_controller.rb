@@ -2,7 +2,6 @@ class BuysController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item
   before_action :move_to_root
-  before_action :move_to_out
 
   def index
     @buy_address = BuyAddress.new
@@ -38,15 +37,7 @@ class BuysController < ApplicationController
   end
 
   def move_to_root
-    item = Item.find(params[:item_id])
-    if current_user.id == item.user_id
-      redirect_to root_path
-    end
-  end
-
-  def move_to_out
-    item = Item.find(params[:item_id])
-    if item.buy.id.present?
+    if current_user.id == @item.user_id || @item.buy.present?
       redirect_to root_path
     end
   end
