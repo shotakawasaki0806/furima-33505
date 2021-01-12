@@ -10,7 +10,7 @@ class BuyAddress
     validates :area_id, numericality: { other_than: 1 }
     validates :city
     validates :house_number
-    validates :phone, length: {maximum: 11}, format: {with: /\d/}
+    validates :phone, format: {with: /\A\d{10,11}\z/}
     validates :token
   end
 

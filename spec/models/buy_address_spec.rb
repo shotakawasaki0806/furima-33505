@@ -62,12 +62,17 @@ RSpec.describe BuyAddress, type: :model do
       it "phoneに-があると購入できない" do
         @buy_address.phone = "080-1234-5678"
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include "Phone is too long (maximum is 11 characters)"
+        expect(@buy_address.errors.full_messages).to include "Phone is invalid"
       end
       it "phoneが12桁以上あると購入できない" do
         @buy_address.phone = "080123456789"
         @buy_address.valid?
-        expect(@buy_address.errors.full_messages).to include "Phone is too long (maximum is 11 characters)"
+        expect(@buy_address.errors.full_messages).to include "Phone is invalid"
+      end
+      it "phoneが英数混合だと購入できない" do
+        @buy_address.phone = "0801234abcd"
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include "Phone is invalid"
       end
       it "phoneが全角だと購入できない" do
         @buy_address.phone = "０８０１２３４５６７８"
@@ -78,6 +83,16 @@ RSpec.describe BuyAddress, type: :model do
         @buy_address.token = nil
         @buy_address.valid?
         expect(@buy_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it "user_idが空だと登録できない" do
+        @buy_address.user_id = nil
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idが空だと登録できない" do
+        @buy_address.item_id = nil
+        @buy_address.valid?
+        expect(@buy_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
