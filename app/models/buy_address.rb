@@ -1,7 +1,7 @@
 class BuyAddress
 
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :area_id, :city, :house_number, :building_name, :phone
+  attr_accessor :user_id, :item_id, :postal_code, :area_id, :city, :house_number, :building_name, :phone, :token
 
   with_options presence: true do
     validates :user_id
@@ -11,6 +11,7 @@ class BuyAddress
     validates :city
     validates :house_number
     validates :phone, length: {maximum: 11}, format: {with: /\d/}
+    validates :token
   end
 
   def save
